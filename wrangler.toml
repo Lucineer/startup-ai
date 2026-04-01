@@ -1,0 +1,10 @@
+name = "startup-ai"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[vars]
+DEEPSEEK_API_KEY = ""
+
+[[kv_namespaces]]
+binding = "STARTUP_KV"
+id = "placeholder-kv-id"
