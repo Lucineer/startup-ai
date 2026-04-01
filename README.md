@@ -1,61 +1,34 @@
-# Startup AI
+# Startup AI — Founder's Copilot
 
-A startup cofounder that lives in your repo. It was there for every investor meeting, every pivot, every customer conversation. No advisor can compete with an AI that was present for every decision.
+> *Your startup's institutional memory. A cocapn vessel for founders.*
 
-## Stack
+## What It Is
 
-- **Cloudflare Worker** — API + routing
-- **KV Storage** — persistent data
-- **DeepSeek** — AI chat via SSE streaming
-- **Single HTML** — full dashboard UI
+A repo-native AI companion for startup founders. It tracks decisions, pivots, investor conversations, and market signals. Not a note-taking app — a persistent co-founder that remembers everything.
 
-## Routes
+## Features
 
-| Endpoint | Methods | Description |
-|---|---|---|
-| `/` | GET | Dashboard UI |
-| `/api/chat` | POST | SSE streaming chat with StartupLog AI |
-| `/api/company` | GET, POST | Company profile |
-| `/api/runway` | GET, POST | Financial/runway tracking |
-| `/api/investors` | GET, POST | Investor CRM |
-| `/api/pitches` | GET, POST | Pitch iteration history |
-| `/api/customers` | GET, POST | Customer development |
-| `/api/decisions` | GET, POST | Decision log |
-| `/api/competitors` | GET, POST | Competitive analysis |
-| `/api/metrics` | GET, POST | KPI dashboard |
-| `/api/huddle` | GET | Auto-generated daily huddle |
+- 📊 **Decision log** — tracks every pivot, hire, and strategic choice
+- 💰 **Investor CRM** — remembers conversations, terms, follow-ups
+- 📈 **Market signals** — accumulates competitive intelligence
+- 🎯 **Milestone tracking** — knows where you are vs. where you planned to be
+- 🔮 **Pattern recognition** — spots connections between market events and startup trajectory
 
-## Setup
+## Deploy
 
 ```bash
+git clone https://github.com/Lucineer/startup-ai.git
+cd startup-ai
 npm install
-npx wrangler kv:namespace create STARTUP_KV
-# Update wrangler.toml with the KV namespace ID
-npx wrangler secret put DEEPSEEK_API_KEY
-# Upload the dashboard HTML to KV:
-npx wrangler kv:key put --binding STARTUP_KV "static:app.html" --path public/app.html
-npm run dev
+npx wrangler dev
 ```
 
-## Seed Data
+## Why Startups Need This
 
-Comes pre-loaded with realistic seed-stage SaaS startup data:
-- **Launchkit** — 6 months old, 4-person team, SF
-- **$180K raised** pre-seed, 8 months runway
-- **12 investors** in pipeline (1 due diligence, 2 warm)
-- **3 pitch versions** with feedback trails
-- **45 trial customers** (8 paying, MRR $2,400)
-- **15 key decisions** with outcomes
-- **4 competitors** analyzed
-- **5% churn**, growing MRR week-over-week
+Startups die from amnesia. Founders forget why they made decisions. New hires don't know the history. Investors ask questions nobody can answer.
 
-## Architecture
+Startup AI is the antidote. It remembers every board meeting, every pivot, every customer conversation. When a new hire joins, they can ask the repo what happened and why. When an investor asks about a decision from 18 months ago, the answer is there.
 
-```
-src/
-  index.ts          Worker entry, routing, SSE chat
-  startup/
-    tracker.ts      Types, seed data, insight generators
-public/
-  app.html          Single-file dashboard
-```
+The repo IS the institutional memory. No onboarding docs. No tribal knowledge. Just a living record that grows with the company.
+
+Author: Superinstance
