@@ -17,7 +17,7 @@ A repo-native AI companion for startup founders. It tracks decisions, pivots, in
 ## Deploy
 
 ```bash
-git clone https://github.com/Lucineer/startup-ai.git
+git clone ./.git
 cd startup-ai
 npm install
 npx wrangler dev
@@ -32,3 +32,7 @@ Startup AI is the antidote. It remembers every board meeting, every pivot, every
 The repo IS the institutional memory. No onboarding docs. No tribal knowledge. Just a living record that grows with the company.
 
 Author: Superinstance
+
+## License
+
+MIT — Built with ❤️ by [Superinstance](https://github.com/superinstance) & [Lucineer](https://github.com/Lucineer) (DiGennaro et al.)
