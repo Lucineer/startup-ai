@@ -1,10 +1,8 @@
+account_id = "049ff5e84ecf636b53b162cbb580aae6"
 name = "startup-ai"
-main = "src/index.ts"
-compatibility_date = "2024-12-01"
-
-[vars]
-DEEPSEEK_API_KEY = ""
+main = "src/worker.ts"
+compatibility_date = "2024-01-01"
 
 [[kv_namespaces]]
-binding = "STARTUP_KV"
-id = "placeholder-kv-id"
+binding = "STATE"
+id = "c743ad4de60c4b2db9d7ecf7c06ef2fe"
