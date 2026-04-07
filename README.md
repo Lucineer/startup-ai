@@ -1,38 +1,59 @@
 # Startup AI — Founder's Copilot
 
-> *Your startup's institutional memory. A cocapn vessel for founders.*
+A Cocapn Fleet vessel that provides an AI assistant for your startup. It remembers your context across conversations.
 
-## What It Is
+This agent maintains a simple, persistent memory for your startup plans, decisions, and tradeoffs using Cloudflare KV. You own the deployment and data.
 
-A repo-native AI companion for startup founders. It tracks decisions, pivots, investor conversations, and market signals. Not a note-taking app — a persistent co-founder that remembers everything.
+---
 
-## Features
+## Why this exists
+You spend time re-explaining your company's context in new chat sessions. This agent keeps that context in your own Cloudflare KV store between conversations, so you can reference past decisions and plans.
 
-- 📊 **Decision log** — tracks every pivot, hire, and strategic choice
-- 💰 **Investor CRM** — remembers conversations, terms, follow-ups
-- 📈 **Market signals** — accumulates competitive intelligence
-- 🎯 **Milestone tracking** — knows where you are vs. where you planned to be
-- 🔮 **Pattern recognition** — spots connections between market events and startup trajectory
+### Live Instance
+Test it without an account:
+https://startup-ai.casey-digennaro.workers.dev
 
-## Deploy
+---
 
-```bash
-git clone ./.git
-cd startup-ai
-npm install
-npx wrangler dev
-```
+## Quick Start
+1.  **Fork this repository.**
+2.  Deploy to Cloudflare Workers (no build step).
+3.  Add your LLM API key as a `LLM_API_KEY` secret.
+4.  Start adding context via the web interface or `/api/seed` endpoint.
 
-## Why Startups Need This
+---
 
-Startups die from amnesia. Founders forget why they made decisions. New hires don't know the history. Investors ask questions nobody can answer.
+## What makes this different
+*   **Your data, your account:** All context is stored in your Cloudflare KV namespace.
+*   **Zero dependencies:** A single source file with no npm packages.
+*   **Cost-effective:** Fits within Cloudflare's free tier for typical early-stage use.
+*   **Fork-first:** You control the code and features. No upstream changes.
 
-Startup AI is the antidote. It remembers every board meeting, every pivot, every customer conversation. When a new hire joins, they can ask the repo what happened and why. When an investor asks about a decision from 18 months ago, the answer is there.
+## Architecture
+A lightweight Cloudflare Worker implementing the Cocapn Fleet protocol. It uses KV for persistence and routes LLM calls using your API key.
 
-The repo IS the institutional memory. No onboarding docs. No tribal knowledge. Just a living record that grows with the company.
+## Key Features
+*   **BYOK LLM routing:** Works with OpenAI-compatible providers (tested with DeepSeek, Moonshot, others).
+*   **Fleet endpoints:** Standard `/health`, `/setup`, `/api/chat`, and `/api/seed` routes.
+*   **Basic context memory:** KV-stored context that persists across sessions.
+*   **Simple web UI:** Plain HTML interface for interaction.
 
-Author: Superinstance
+**Current Limitation:** The memory is a simple key-value store. For complex document retrieval, you may need to extend it with a vector database.
+
+---
+
+## Setup
+After deploying, visit your worker's `/setup` route to configure your LLM API key.
+
+## Contributing
+Contributions are welcome. This project follows a fork-first philosophy—adapt it for your needs.
 
 ## License
+MIT License.
 
-MIT — Built with ❤️ by [Superinstance](https://github.com/superinstance) & [Lucineer](https://github.com/Lucineer) (DiGennaro et al.)
+**Attribution:** Superinstance & Lucineer (DiGennaro et al.)
+
+---
+<div>
+  <strong>Fleet:</strong> <a href="https://the-fleet.casey-digennaro.workers.dev">the-fleet</a> | <a href="https://cocapn.ai">cocapn.ai</a>
+</div>
