@@ -1,57 +1,47 @@
-# Startup AI — Founder's Copilot
+# Startup AI — Your Decisions, Remembered
 
-You don't need another generic chatbot. You need a tool that remembers your tradeoffs and decisions.
+You don't remember that product tradeoff you discussed last week. Typical AI chatbots don't either. This one retains that context across every conversation.
 
-This is a Cocapn Fleet vessel built for founders. It maintains a record of your roadmap debates, unit math, and key compromises across conversations. Your context is preserved and owned by you. It is a single file you run yourself.
+It's a conversational AI that stores your discussion history, so you don't have to re-explain your startup's context in every new chat. All data stays in a Cloudflare Worker you control.
 
-Most founder tools lock your data in a platform. This is code you control. You own the memory and the API key.
-
----
-
-## 🚀 Try it
-Live public instance: https://startup-ai.casey-digennaro.workers.dev
-
-This demo uses ephemeral memory. For a permanent private copilot, deploy your own.
-
----
-
-## How it Works
-*   **You own everything.** No accounts. No platform TOS.
-*   **Context is persistent.** It uses your Cloudflare KV store to remember past conversations.
-*   **Zero lock-in.** One source file. No npm. No build pipeline.
-*   **Runs on Cloudflare's free tier.** You likely will never pay to run this.
-
-**One Honest Limitation:** Memory is stored in Cloudflare KV, which has eventual consistency. This means rare, brief delays between writing and reading your latest context.
-
----
+Try the public demo: [startup-ai.casey-digennaro.workers.dev](https://startup-ai.casey-digennaro.workers.dev)
 
 ## Quick Start
-1.  **Fork** this repository.
-2.  **Deploy** it directly to Cloudflare Workers.
-3.  Add your LLM API key as a Cloudflare Secret. Visit your worker's `/setup` page for instructions.
 
-That's the entire setup.
+1.  **Fork** this repository.
+2.  **Deploy** it to Cloudflare Workers.
+3.  Add your LLM API key as a Cloudflare Secret (`LLM_API_KEY`). Visit your worker's `/setup` endpoint for detailed instructions.
+
+That's it. You now have a private chat interface with memory.
+
+## How It Is Different
+
+1.  **You control it.** It's a single Cloudflare Worker. No service can be shut off, and no one can read your stored conversations.
+2.  **Simple memory.** It appends your full conversation history to each new prompt. It does not use a vector database or embedding models.
+3.  **Zero configuration.** No user accounts, surveys, or complex setup. Fork, add an API key, and deploy.
 
 ## Features
-*   **BYOK LLM Routing:** Works with OpenAI, DeepSeek, Moonshot, SiliconFlow, and any OpenAI-compatible endpoint.
-*   **Isolated Memory:** Persistent context stored in your private Cloudflare KV.
-*   **Fleet Protocol Compliant:** Seamlessly works with all other Cocapn Fleet vessels.
-*   **Lightweight Interface:** Plain HTML. No heavy JavaScript.
-*   **Zero Dependencies:** No runtime packages.
-*   **Standard Endpoints:** `/health`, `/setup`, `/api/chat`, `/api/seed`.
+
+*   **Bring your own key:** Works with OpenAI, Anthropic, DeepSeek, and other OpenAI-compatible APIs.
+*   **Private memory:** All conversation history is stored solely in your Cloudflare KV namespace.
+*   **Zero runtime dependencies:** The Worker has no npm packages. It will not break from external dependency changes.
+*   **Lightweight interface:** A plain HTML frontend that loads quickly.
+*   **Standard endpoints:** Includes `/health`, `/setup`, `/api/chat`, and `/api/seed` for integration.
+
+## A Specific Limitation
+
+Conversation history is capped by Cloudflare KV's 25MB per key limit. In practice, this allows for roughly 50,000 to 100,000 messages before older context must be manually trimmed.
 
 ## Architecture
-This is a single-file Cloudflare Worker implementing the Cocapn Fleet protocol. All memory stays in your Cloudflare KV. All LLM calls go directly from your worker to your provider. No data passes through our servers.
+
+This is a single-file Cloudflare Worker. LLM calls go directly from your Worker to your chosen provider's API. There is no intermediary server, logging, or telemetry.
 
 ## Contributing
-This project follows a fork-first philosophy. Fork it, modify it for your startup, and make it your own. If you build something generally useful, we welcome contributions.
+
+This project follows a fork-first philosophy. It is a starting point. You are encouraged to fork it, modify it extensively, and make it fit your needs. If you build a generally useful improvement, contributions back are welcome.
 
 ## License
+
 MIT License.
 
-**Attribution:** Superinstance & Lucineer (DiGennaro et al.)
-
----
-<div>
-<strong>Fleet:</strong> <a href="https://the-fleet.casey-digennaro.workers.dev">the-fleet</a> | <a href="https://cocapn.ai">cocapn.ai</a>
-</div>
+<div style="text-align:center;padding:16px;color:#64748b;font-size:.8rem"><a href="https://the-fleet.casey-digennaro.workers.dev" style="color:#64748b">The Fleet</a> &middot; <a href="https://cocapn.ai" style="color:#64748b">Cocapn</a></div>
